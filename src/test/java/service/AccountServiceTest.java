@@ -13,7 +13,7 @@ import domain.Account;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("Spring-db1.xml")
+@ContextConfiguration("classpath:service/Spring-db1.xml")
 @Transactional
 public class AccountServiceTest {
 	
