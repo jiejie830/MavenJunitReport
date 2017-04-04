@@ -1,29 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-<beans xmlns="http://www.Springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.Springframework.org/schema/context"
-	xsi:schemaLocation="http://www.Springframework.org/schema/beans 
- http://www.Springframework.org/schema/beans/Spring-beans-3.0.xsd 
- http://www.Springframework.org/schema/context 
- http://www.Springframework.org/schema/context/Spring-context-3.0.xsd ">
-
-	
-	<bean id="datasource"
-		class="
- org.Springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
 		<property name="username" value="root" />
 		<property name="password" value="780516" />
 	</bean>
-	
-	<bean id="initer" init-method="init" class="service.Initializer">
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="datasource"></property>
 	</bean>
-	
-	<bean id="accountDao" depends-on="initer" class="DAO.AccountDAO">
+
+	<bean id="accountDao" class="dao.AccountDAO">
 		<property name="dataSource" ref="datasource" />
 	</bean>
 	
-	<bean id="accountService" class="service.AccountService">
-	</bean>
-	
+	<bean id="accountService" class="service.AccountService" />
+		
 </beans>
